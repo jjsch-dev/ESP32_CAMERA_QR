@@ -551,12 +551,13 @@ static const httpd_uri_t jpg_stream = {
     .handler   = handle_jpg_stream,
 };
 
-static ip4_addr_t get_ip_addr(void)
+static esp_ip4_addr_t get_ip_addr(void)
 {
-    tcpip_adapter_ip_info_t ip_info; 
-   	
-    // IP address.
-    tcpip_adapter_get_ip_info(TCPIP_ADAPTER_IF_STA, &ip_info);
+    esp_netif_t *netif = esp_netif_get_default_netif(); 
+    
+    // Get the IP address information for the network interface
+    esp_netif_ip_info_t ip_info;
+    esp_netif_get_ip_info(netif, &ip_info);
 
     return ip_info.ip;
 }
@@ -574,8 +575,8 @@ static httpd_handle_t start_webserver(void)
 
         sensor_t * sensor = esp_camera_sensor_get();
 
-        ip4_addr_t s_ip_addr = get_ip_addr();
-       
+        esp_ip4_addr_t s_ip_addr = get_ip_addr();
+        
         if (sensor->pixformat == PIXFORMAT_GRAYSCALE) {
             httpd_register_uri_handler(server, &bmp);
             httpd_register_uri_handler(server, &bmp_stream);

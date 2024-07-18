@@ -5,7 +5,10 @@ set(COMPONENT_REQUIRES
     nvs_flash
     esp_http_server
     camera
-    quirc    
+    quirc
+    esp_wifi
+    esp_netif
+    esp_eth
     protocol_examples_common
     )
 

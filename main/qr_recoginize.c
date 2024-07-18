@@ -65,7 +65,7 @@ void dump_data(const struct quirc_data *data) {
 	printf("    Payload: %s\n", data->payload);
 
 	if (data->eci)
-		printf("    ECI: %d\n", data->eci);
+		printf("    ECI: %ld\n", data->eci);
 }
 
 static void dump_info(struct quirc *q) {
